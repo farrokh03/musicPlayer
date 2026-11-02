@@ -1,4 +1,4 @@
-import type { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction, ReactNode } from "react";
 
 type SideMenuProps = { menu: boolean; setMenu: Dispatch<SetStateAction<boolean>>; playlistOpen: (open: boolean) => void };
 
@@ -13,7 +13,7 @@ const SideMenu = ({ menu, setMenu, playlistOpen }: SideMenuProps) => {
     ["heart", "Favorites"],
     ["history", "History"],
   ];
-  const paths: Record<string, React.ReactNode> = {
+  const paths: Record<string, ReactNode> = {
     home: (
       <>
         <path d="M3 11 12 3l9 8" />
