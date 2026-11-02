@@ -1,2 +1,2 @@
-export type { Track } from "../../../mocks/catalog.mock";
-export { MOCK_TRACKS as TRACKS } from "../../../mocks/catalog.mock";
+export type { Track } from "../../../features/types/artist.types";
+export { MOCK_TRACKS as TRACKS } from "../../../mocks/tracks.mock";
