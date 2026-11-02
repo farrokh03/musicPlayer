@@ -13,8 +13,8 @@ export default function RecentlyPlayed() {
       <div className="space-y-3">
         {items.map((item) => (
           <button
-            key={item.title}
-            className="flex w-full items-center gap-3 rounded-lg text-left transition hover:bg-white/4"
+            key={item.id}
+            className="group flex w-full items-center gap-3 rounded-lg text-left transition hover:bg-white/4"
           >
             <div
               className={`relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-linear-to-br ${item.cover}`}
