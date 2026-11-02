@@ -4,6 +4,8 @@ import MainLayout from "./components/layout/MainLayout";
 import { PlayerProvider } from "./features/player/context/PlayerContext";
 import Auth from "./Pages/AuthPage";
 import ArtistProfile from "./Pages/ArtistProfile";
+import ArtistDashboardPage from "./features/artist-dashboard/pages/ArtistDashboardPage";
+
 const App = () => {
   return (
     <PlayerProvider>
@@ -11,6 +13,7 @@ const App = () => {
         <Routes>
           <Route element={<MainLayout />}>
             <Route path="/" element={<HomePage />} />
+            <Route path="/artist/dashboard" element={<ArtistDashboardPage />} />
           </Route>
           <Route path="/auth" element={<Auth />} />
           <Route path="/artistProfile" element={<ArtistProfile />} />
@@ -19,4 +22,5 @@ const App = () => {
     </PlayerProvider>
   );
 };
+
 export default App;
