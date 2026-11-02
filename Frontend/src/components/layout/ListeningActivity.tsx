@@ -53,7 +53,7 @@ export default function ListeningActivity() {
 
         <div className="flex items-center justify-between gap-3">
           <div>
-            <p className="text-[10px] text-[#e8dce5]"{MOCK_LISTENING_ACTIVITY.topGenre}</p>
+            <p className="text-[10px] text-[#e8dce5]">{MOCK_LISTENING_ACTIVITY.topGenre}</p>
             <p className="mt-1 text-[9px] text-[#887785]">
               {MOCK_LISTENING_ACTIVITY.topGenrePlaylist}
             </p>
