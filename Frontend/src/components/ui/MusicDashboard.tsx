@@ -309,7 +309,14 @@ function HorizontalCards({
   items,
   variant,
 }: {
-  items: { title: string; subtitle: string; art: string }[];
+  items: {
+    id: number;
+    title: string;
+    duration: number;
+    album: string;
+    cover: string;
+    artist: string;
+  }[];
   variant: "mix" | "release";
 }) {
   return (
@@ -332,7 +339,7 @@ function HorizontalCards({
               {item.title}
             </p>
             <p className="mt-0.5 truncate text-[7px] text-[#948291]">
-              {item.subtitle}
+              {item.album}
             </p>
           </div>
 
@@ -349,7 +356,7 @@ function MadeForYou() {
   return (
     <section>
       <SectionHeading title="Made for You" action="‹   ›" />
-      <HorizontalCards items={mixes} variant="mix" />
+      <HorizontalCards items={songs} variant="mix" />
     </section>
   );
 }
@@ -358,7 +365,7 @@ function NewReleases() {
   return (
     <section>
       <SectionHeading title="New Releases" action="‹   ›" />
-      <HorizontalCards items={releases} variant="release" />
+      <HorizontalCards items={songs} variant="release" />
     </section>
   );
 }

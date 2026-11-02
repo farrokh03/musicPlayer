@@ -1,6 +1,7 @@
 import { useMemo, useState, useRef } from "react";
 import { usePlayer } from "../../features/player/context/PlayerContext";
 import { TRACKS } from "./../../features/player/data/tracks.mock";
+
 const GlobalHeader = () => {
   const [globalSearch, setGlobalSearch] = useState("");
   const [profileOpen, setProfileOpen] = useState(false);
@@ -207,7 +208,7 @@ const GlobalHeader = () => {
               <button
                 key={t.id}
                 onClick={() => {
-                  playTrack(t.id);
+                  playTrack(t);
                   setGlobalSearch("");
                 }}
               >
