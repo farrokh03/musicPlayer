@@ -1,31 +1,19 @@
 import { usePlayer } from "./../../features/player/context/PlayerContext";
-import { useState } from "react";
-import { ALL_TRACKS } from "./../../mocks/tracks";
-import { Shuffle } from "lucide-react";
-export function GlobalMiniPlayer({ props }: any) {
-  const [libraryTracks, setLibraryTracks] = useState(ALL_TRACKS.slice(0, 5));
+export function GlobalMiniPlayer() {
 
   const {
-    volume,
     track,
     playing,
-    progress,
     shuffle,
     repeat,
     liked,
     setRepeat,
     setLiked,
     setShuffle,
-    setProgress,
     setPlaying,
-    setVolume,
     previousTrack,
     nextTrack,
   } = usePlayer();
-
-  const elapsed = Math.floor((track.duration * progress) / 100);
-  const fmt = (seconds: number) =>
-    `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, "0")}`;
 
   const paths: Record<string, React.ReactNode> = {
     home: (
@@ -280,7 +268,7 @@ export function GlobalMiniPlayer({ props }: any) {
           icon="shuffle"
           label="Shuffle"
           active={shuffle}
-          onClick={() => setShuffle(!Shuffle)}
+          onClick={() => setShuffle(!shuffle)}
         />
         <button
           className="skip"
