@@ -1,4 +1,5 @@
-import { usePlayer } from "./../../features/player/context/PlayerContext";
+import { usePlayer } from "../../features/player/context/PlayerContext";
+import type { ReactNode } from "react";
 export function GlobalMiniPlayer() {
 
   const {
@@ -15,7 +16,7 @@ export function GlobalMiniPlayer() {
     nextTrack,
   } = usePlayer();
 
-  const paths: Record<string, React.ReactNode> = {
+  const paths: Record<string, ReactNode> = {
     home: (
       <>
         <path d="M3 11 12 3l9 8" />
