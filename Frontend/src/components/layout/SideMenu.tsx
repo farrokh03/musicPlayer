@@ -1,4 +1,8 @@
-const SideMenu = ({ props }: any) => {
+import type { Dispatch, SetStateAction } from "react";
+
+type SideMenuProps = { menu: boolean; setMenu: Dispatch<SetStateAction<boolean>>; playlistOpen: (open: boolean) => void };
+
+const SideMenu = ({ menu, setMenu, playlistOpen }: SideMenuProps) => {
   const navItems = [
     ["home", "Home"],
     ["explore", "Explore"],
@@ -155,10 +159,10 @@ const SideMenu = ({ props }: any) => {
   }
 
   return (
-    <aside className="nav-rail">
+    <aside className={`nav-rail ${menu ? "expanded" : "collapsed"}`}>
       <button
         className="brand"
-        onClick={() => props.setMenu((v: any) => !v)}
+        onClick={() => setMenu((current) => !current)}
         title="Collapse navigation"
       >
         <span className="brand-mark">
@@ -170,7 +174,7 @@ const SideMenu = ({ props }: any) => {
         {navItems.map(([icon, label], i) => (
           <button
             key={label}
-            onClick={() => label === "Playlists" && props.playlistOpen(true)}
+            onClick={() => label === "Playlists" && playlistOpen(true)}
             className={`nav-item ${i === 0 ? "active" : ""}`}
             title={label}
           >
