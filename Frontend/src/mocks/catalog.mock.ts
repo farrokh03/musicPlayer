@@ -110,6 +110,17 @@ export const MOCK_TRACKS: Track[] = [
   { id: 10, title: "Blood Circuit", artist: "Neon Collapse", album: "Fracture", duration: 201, cover: artwork.crimson },
 ];
 
+export const MOCK_FEATURED_RELEASE = {
+  id: "crimson-tide-single",
+  title: "Crimson Tide",
+  artist: "Alex Cole",
+  releaseType: "Single",
+  year: 2025,
+  trackCount: 3,
+  genre: "Alternative / Electronic",
+  cover: artwork.crimson,
+};
+
 export const MOCK_PLAYLISTS: Playlist[] = [
   { id: "electronic-essentials", title: "Electronic Essentials", subtitle: "58 tracks", cover: "from-red-950 via-red-600 to-black", owner: "CRIMSON" },
   { id: "indie-dreams", title: "Indie Dreams", subtitle: "42 tracks", cover: "from-cyan-950 via-teal-700 to-black", owner: "CRIMSON" },
