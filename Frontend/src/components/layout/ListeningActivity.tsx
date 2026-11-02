@@ -1,8 +1,7 @@
 import { useState } from "react";
+import { MOCK_LISTENING_ACTIVITY } from "../../mocks/catalog.mock";
 
-const bars = [
-  15, 25, 13, 31, 39, 18, 11, 28, 14, 37, 17, 23, 44, 16, 52, 29, 18, 36,
-];
+
 
 export default function ListeningActivity() {
   const [period, setPeriod] = useState<"Week" | "Month">("Week");
@@ -26,7 +25,7 @@ export default function ListeningActivity() {
           className="flex h-13.25 min-w-0 flex-1 items-end justify-between gap-0.75"
           aria-label="Listening activity bar chart"
         >
-          {bars.map((height, index) => (
+          {MOCK_LISTENING_ACTIVITY.weekBars.map((height, index) => (
             <div
               key={index}
               className={`w-full max-w-1.75 rounded-t-xs transition-colors ${
@@ -44,7 +43,7 @@ export default function ListeningActivity() {
         </div>
 
         <div className="w-22 shrink-0 pb-0.5">
-          <p className="text-sm font-semibold tracking-tight">2h 34m</p>
+          <p className="text-sm font-semibold tracking-tight">{MOCK_LISTENING_ACTIVITY.totalTime}</p>
           <p className="text-[9px] text-[#a99aa6]">Listening time</p>
         </div>
       </div>
@@ -54,9 +53,9 @@ export default function ListeningActivity() {
 
         <div className="flex items-center justify-between gap-3">
           <div>
-            <p className="text-[10px] text-[#e8dce5]">Electronic</p>
+            <p className="text-[10px] text-[#e8dce5]"{MOCK_LISTENING_ACTIVITY.topGenre}</p>
             <p className="mt-1 text-[9px] text-[#887785]">
-              Playlist · 58 tracks
+              {MOCK_LISTENING_ACTIVITY.topGenrePlaylist}
             </p>
           </div>
 
