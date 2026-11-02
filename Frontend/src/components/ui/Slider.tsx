@@ -14,8 +14,6 @@ import {
 
 import { MOCK_ARTISTS as ARTISTS } from "../../mocks/artist.mock";
 
-type ArtistSlide = (typeof ARTISTS)[number];
-
 type Props = {
   autoPlay?: boolean;
   interval?: number;
