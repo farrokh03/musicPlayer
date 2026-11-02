@@ -12,67 +12,9 @@ import {
 
 // import "./ArtistHeroSlider.css";
 
-type ArtistSlide = {
-  id: string;
-  name: string;
-  avatar: string;
-  cover: string;
-  genres: string[];
-  bio: string;
-  followers: string;
-  monthlyListeners: string;
-  trackCount: number;
-  verified: boolean;
-};
+import { MOCK_ARTISTS as ARTISTS } from "../../mocks/artist.mock";
 
-const ARTISTS: ArtistSlide[] = [
-  {
-    id: "alex-cole",
-    name: "Alex Cole",
-    avatar:
-      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop&auto=format",
-    cover:
-      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop&auto=format",
-    genres: ["Alternative", "Electronic", "Indie"],
-    bio: "Alex Cole is a genre-blending artist known for atmospheric soundscapes and emotional storytelling. His music explores the space between light and darkness.",
-    followers: "124.5K",
-    monthlyListeners: "583.2K",
-    trackCount: 24,
-    verified: true,
-  },
-  {
-    id: "vale",
-    name: "Vale",
-    avatar:
-      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=600&fit=crop&auto=format",
-
-    cover:
-      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=600&h=600&fit=crop&auto=format",
-
-    genres: ["Dark Pop", "Electronic", "Alternative"],
-    bio: "Explore immersive soundscapes, dark melodies, and a new perspective on alternative electronic music.",
-    followers: "98.2K",
-    monthlyListeners: "412.8K",
-    trackCount: 18,
-    verified: true,
-  },
-  {
-    id: "cassian",
-    name: "Cassian",
-    avatar:
-      "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&h=600&fit=crop&auto=format",
-
-    cover:
-      "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=600&h=600&fit=crop&auto=format",
-
-    genres: ["Electronic", "Melodic Techno", "Indie"],
-    bio: "A sonic journey through atmospheric rhythms, cinematic textures, and unforgettable melodies.",
-    followers: "76.8K",
-    monthlyListeners: "325.4K",
-    trackCount: 31,
-    verified: false,
-  },
-];
+type ArtistSlide = (typeof ARTISTS)[number];
 
 type Props = {
   autoPlay?: boolean;
