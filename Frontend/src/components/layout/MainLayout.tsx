@@ -23,10 +23,7 @@ const MainLayout = () => {
         />
         <Outlet />
         <div className="col-start-3 w-90 px-2 py-1 flex gap-2 flex-col">
-          <GlobalMiniPlayer
-            playlistopen={playlistOpen}
-            setplaylistopen={setPlaylistOpen}
-          />
+          <GlobalMiniPlayer />
           <Queue />
           <ListeningActivity />
           <RecentlyPlayed />
