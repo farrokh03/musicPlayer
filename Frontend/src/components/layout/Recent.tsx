@@ -1,25 +1,7 @@
 import { Disc3 } from "lucide-react";
+import { MOCK_RECENT_ITEMS as items } from "../../mocks/catalog.mock";
 
-const items = [
-  {
-    title: "Alex Cole",
-    subtitle: "Artist · 24 tracks",
-    cover: "from-red-950 via-rose-700 to-black",
-    symbol: "♫",
-  },
-  {
-    title: "Neon Collapse",
-    subtitle: "Album · 2025",
-    cover: "from-indigo-950 via-violet-600 to-fuchsia-950",
-    symbol: "✦",
-  },
-  {
-    title: "Late Night Vibes",
-    subtitle: "Playlist · 58 tracks",
-    cover: "from-cyan-950 via-pink-800 to-indigo-950",
-    symbol: "≋",
-  },
-];
+
 
 export default function RecentlyPlayed() {
   return (
