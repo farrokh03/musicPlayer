@@ -1,3 +1,5 @@
+import type { KeyboardEvent } from "react";
+
 export const artistTabs = [
   "Overview",
   "Releases",
@@ -23,7 +25,7 @@ export default function ArtistNavigation({
   direction = "ltr",
 }: ArtistNavigationProps) {
   const handleKeyDown = (
-    event: React.KeyboardEvent<HTMLButtonElement>,
+    event: KeyboardEvent<HTMLButtonElement>,
     index: number,
   ) => {
     if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
