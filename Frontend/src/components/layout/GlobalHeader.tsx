@@ -1,4 +1,4 @@
-import { useMemo, useState, useRef } from "react";
+import { useMemo, useState, useRef, type ReactNode } from "react";
 import { usePlayer } from "../../features/player/context/PlayerContext";
 import { TRACKS } from "./../../features/player/data/tracks.mock";
 
@@ -19,7 +19,7 @@ const GlobalHeader = () => {
     [globalSearch],
   );
 
-  const paths: Record<string, React.ReactNode> = {
+  const paths: Record<string, ReactNode> = {
     home: (
       <>
         <path d="M3 11 12 3l9 8" />
