@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Heart, MoreHorizontal, Play } from "lucide-react";
 import { MOCK_TRACKS } from "../../mocks/catalog.mock";
 import { SectionHeading } from "./DashboardPrimitives";
+import type { Track } from "../types/artist.types";
 
 function formatDuration(durationInSeconds: number) {
   const minutes = Math.floor(durationInSeconds / 60);
@@ -9,7 +10,17 @@ function formatDuration(durationInSeconds: number) {
   return `${minutes}:${String(seconds).padStart(2, "0")}`;
 }
 
-export default function PopularTracks() {
+type PopularTracksProps = {
+  tracks?: Track[];
+  onPlayTrack?: (track: Track) => void;
+  onPauseTrack?: (track: Track) => void;
+};
+
+export default function PopularTracks({
+  tracks = MOCK_TRACKS,
+  onPlayTrack,
+  onPauseTrack,
+}: PopularTracksProps) {
   const [favorites, setFavorites] = useState<number[]>([]);
   const [playingTrackId, setPlayingTrackId] = useState<number | null>(null);
 
@@ -17,7 +28,11 @@ export default function PopularTracks() {
     <section className="min-w-0 h-40 overflow-y-auto text-[14px]">
       <SectionHeading title="Popular Tracks" />
       <div className="rounded-lg border border-[#35151e] bg-[#100a0e] px-2">
-        {MOCK_TRACKS.map((track, index) => {
+        {tracks.length === 0 ? (
+          <p className="px-3 py-8 text-center text-[11px] text-[#9b8998]">
+            No tracks have been published here yet.
+          </p>
+        ) : tracks.map((track, index) => {
           const isFavorite = favorites.includes(track.id);
           const isPlaying = playingTrackId === track.id;
 
@@ -31,9 +46,11 @@ export default function PopularTracks() {
               </span>
               <button
                 aria-label={`${isPlaying ? "Pause" : "Play"} ${track.title}`}
-                onClick={() =>
-                  setPlayingTrackId(isPlaying ? null : track.id)
-                }
+                onClick={() => {
+                  if (isPlaying) onPauseTrack?.(track);
+                  else onPlayTrack?.(track);
+                  setPlayingTrackId(isPlaying ? null : track.id);
+                }}
                 className="relative shrink-0"
               >
                 <img

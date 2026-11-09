@@ -3,10 +3,20 @@ import { MoreHorizontal, Play, Plus, Share2, Shuffle } from "lucide-react";
 import { MOCK_FEATURED_RELEASE } from "../../mocks/catalog.mock";
 import { AlbumArt, SectionHeading } from "./DashboardPrimitives";
 
-export default function FeaturedRelease() {
+type FeaturedReleaseProps = {
+  release?: FeaturedReleaseData;
+  onPlay?: () => void;
+  onPause?: () => void;
+};
+
+export default function FeaturedRelease({
+  release: providedRelease,
+  onPlay,
+  onPause,
+}: FeaturedReleaseProps) {
   const [playing, setPlaying] = useState(false);
   const [saved, setSaved] = useState(false);
-  const release = MOCK_FEATURED_RELEASE;
+  const release = providedRelease ?? MOCK_FEATURED_RELEASE;
 
   return (
     <section className="min-w-0">
@@ -33,7 +43,11 @@ export default function FeaturedRelease() {
           </p>
           <div className="mt-2 flex flex-wrap items-center gap-1.5">
             <button
-              onClick={() => setPlaying((current) => !current)}
+              onClick={() => {
+                if (playing) onPause?.();
+                else onPlay?.();
+                setPlaying((current) => !current);
+              }}
               className="flex h-5 items-center gap-1 rounded-full bg-[#f32648] px-3 text-[8px] font-medium text-white hover:bg-[#ff4561]"
             >
               <Play size={9} fill="currentColor" />

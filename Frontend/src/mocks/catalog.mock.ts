@@ -6,6 +6,7 @@
 
 import type {
   Artist,
+  ArtistCollaboration,
   FeaturedRelease,
   Playlist,
   Release,
@@ -14,6 +15,7 @@ import type {
 export type {
   Artist,
   ArtistActivityItem,
+  ArtistCollaboration,
   ArtistCollaboration,
   ArtistHeroProps,
   ArtistSocialLink,
@@ -126,11 +128,11 @@ export const MOCK_MIXES = [
 ];
 
 export const MOCK_RELEASES: Release[] = [
-  { id: "neon-collapse", title: "Neon Collapse", subtitle: "Alex Cole · Album · 2025", cover: "from-red-950 via-rose-700 to-black" },
-  { id: "midnight-bloom", title: "Midnight Bloom", subtitle: "The Lost Frequencies · Single", cover: "from-fuchsia-950 via-pink-600 to-black" },
-  { id: "afterglow", title: "Afterglow", subtitle: "Sofia Lane · Single · 2025", cover: "from-amber-950 via-yellow-800 to-slate-950" },
-  { id: "voidwalk", title: "Voidwalk", subtitle: "VALE · Album · 2024", cover: "from-blue-950 via-indigo-700 to-black" },
-  { id: "dusk-protocol", title: "Dusk Protocol", subtitle: "Pale Signal · EP · 2025", cover: "from-sky-950 via-cyan-800 to-black" },
+  { id: "neon-collapse", title: "Neon Collapse", subtitle: "Alex Cole · Album · 2025", artist: "Alex Cole", releaseType: "Album", year: 2025, cover: "from-red-950 via-rose-700 to-black" },
+  { id: "midnight-bloom", title: "Midnight Bloom", subtitle: "The Lost Frequencies · Single", artist: "The Lost Frequencies", releaseType: "Single", cover: "from-fuchsia-950 via-pink-600 to-black" },
+  { id: "afterglow", title: "Afterglow", subtitle: "Sofia Lane · Single · 2025", artist: "Sofia Lane", releaseType: "Single", year: 2025, cover: "from-amber-950 via-yellow-800 to-slate-950" },
+  { id: "voidwalk", title: "Voidwalk", subtitle: "VALE · Album · 2024", artist: "VALE", releaseType: "Album", year: 2024, cover: "from-blue-950 via-indigo-700 to-black" },
+  { id: "dusk-protocol", title: "Dusk Protocol", subtitle: "Pale Signal · EP · 2025", artist: "Pale Signal", releaseType: "EP", year: 2025, cover: "from-sky-950 via-cyan-800 to-black" },
 ];
 
 export const MOCK_RECENT_ITEMS = [
@@ -152,3 +154,7 @@ export const MOCK_LISTENING_ACTIVITY = {
   topGenre: "Electronic",
   topGenrePlaylist: "Playlist · 58 tracks",
 };
+
+
+// Add collaboration entries here when they are available from the artist catalog.
+export const MOCK_ARTIST_COLLABORATIONS: Record<string, ArtistCollaboration[]> = {};
