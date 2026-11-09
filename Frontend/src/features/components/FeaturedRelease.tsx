@@ -2,6 +2,7 @@ import { useState } from "react";
 import { MoreHorizontal, Play, Plus, Share2, Shuffle } from "lucide-react";
 import { MOCK_FEATURED_RELEASE } from "../../mocks/catalog.mock";
 import { AlbumArt, SectionHeading } from "./DashboardPrimitives";
+import type { FeaturedRelease as FeaturedReleaseData } from "../types/artist.types";
 
 type FeaturedReleaseProps = {
   release?: FeaturedReleaseData;

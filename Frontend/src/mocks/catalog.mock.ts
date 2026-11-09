@@ -16,7 +16,6 @@ export type {
   Artist,
   ArtistActivityItem,
   ArtistCollaboration,
-  ArtistCollaboration,
   ArtistHeroProps,
   ArtistSocialLink,
   FeaturedRelease,

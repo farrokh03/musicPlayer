@@ -62,7 +62,7 @@ export default function ArtistProfilePage() {
           .filter(Boolean)
           .join(" · "),
         date: release.year ? String(release.year) : "Recently",
-        kind: "release",
+        kind: "release" as const,
       })),
     [artistReleases],
   );
