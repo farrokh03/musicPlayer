@@ -110,7 +110,7 @@ export default function ArtistProfilePage() {
       case "Overview":
         return (
           <div className="space-y-4">
-            <div className="grid grid-cols-1 gap-4 xl:grid-cols-[1.2fr_1fr]">
+            <div className={`grid grid-cols-1 gap-4 ${featuredRelease ? "xl:grid-cols-[1.2fr_1fr]" : ""}`}>
               {featuredRelease && (
                 <FeaturedRelease
                   release={featuredRelease}

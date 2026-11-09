@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Heart, MoreHorizontal, Play } from "lucide-react";
+import { Heart, MoreHorizontal } from "lucide-react";
 import { MOCK_TRACKS } from "../../mocks/catalog.mock";
 import { SectionHeading } from "./DashboardPrimitives";
 import type { Track } from "../types/artist.types";
