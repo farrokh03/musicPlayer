@@ -4,35 +4,24 @@
  * instead of declaring their own sample content.
  */
 
-export type Artist = {
-  id: string;
-  name: string;
-  avatar: string;
-  cover: string;
-  genres: string[];
-  bio: string;
-  followers: string;
-  monthlyListeners: string;
-  trackCount: number;
-  verified: boolean;
-};
-
-export type Track = {
-  id: number;
-  title: string;
-  artist: string;
-  album: string;
-  duration: number;
-  cover: string;
-};
-
-export type Playlist = {
-  id: string;
-  title: string;
-  subtitle: string;
-  cover: string;
-  owner: string;
-};
+import type {
+  Artist,
+  FeaturedRelease,
+  Playlist,
+  Release,
+  Track,
+} from "../features/types/artist.types";
+export type {
+  Artist,
+  ArtistActivityItem,
+  ArtistCollaboration,
+  ArtistHeroProps,
+  ArtistSocialLink,
+  FeaturedRelease,
+  Playlist,
+  Release,
+  Track,
+} from "../features/types/artist.types";
 
 const artwork = {
   crimson: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&h=600&fit=crop&auto=format",
@@ -98,7 +87,7 @@ export const MOCK_ARTISTS: Artist[] = [
 ];
 
 export const MOCK_TRACKS: Track[] = [
-  { id: 1, title: "Crimson Tide", artist: "Neon Collapse", album: "Fracture", duration: 224, cover: artwork.crimson },
+  { id: 1, title: "Crimson Tide", artist: "Alex Cole", album: "Fracture", duration: 224, cover: artwork.crimson },
   { id: 2, title: "Dark Matter", artist: "VALE", album: "Voidwalk", duration: 198, cover: artwork.vale },
   { id: 3, title: "Hollow Echo", artist: "Pale Signal", album: "Dusk Protocol", duration: 261, cover: artwork.pale },
   { id: 4, title: "Burning Slow", artist: "Cassian", album: "Periphery", duration: 183, cover: artwork.cassian },
@@ -107,10 +96,10 @@ export const MOCK_TRACKS: Track[] = [
   { id: 7, title: "Undertow", artist: "Feral Lux", album: "Depths", duration: 243, cover: artwork.feral },
   { id: 8, title: "Ritual Static", artist: "Corvo", album: "Hexfield", duration: 189, cover: artwork.corvo },
   { id: 9, title: "Pale Frequency", artist: "AEON", album: "Stasis", duration: 272, cover: artwork.aeon },
-  { id: 10, title: "Blood Circuit", artist: "Neon Collapse", album: "Fracture", duration: 201, cover: artwork.crimson },
+  { id: 10, title: "Blood Circuit", artist: "Alex Cole", album: "Fracture", duration: 201, cover: artwork.crimson },
 ];
 
-export const MOCK_FEATURED_RELEASE = {
+export const MOCK_FEATURED_RELEASE: FeaturedRelease = {
   id: "crimson-tide-single",
   title: "Crimson Tide",
   artist: "Alex Cole",
@@ -136,7 +125,7 @@ export const MOCK_MIXES = [
   { id: "alternative-mix", title: "Alternative Mix", subtitle: "Playlist · 94 tracks", cover: "from-fuchsia-950 via-pink-700 to-indigo-950" },
 ];
 
-export const MOCK_RELEASES = [
+export const MOCK_RELEASES: Release[] = [
   { id: "neon-collapse", title: "Neon Collapse", subtitle: "Alex Cole · Album · 2025", cover: "from-red-950 via-rose-700 to-black" },
   { id: "midnight-bloom", title: "Midnight Bloom", subtitle: "The Lost Frequencies · Single", cover: "from-fuchsia-950 via-pink-600 to-black" },
   { id: "afterglow", title: "Afterglow", subtitle: "Sofia Lane · Single · 2025", cover: "from-amber-950 via-yellow-800 to-slate-950" },
