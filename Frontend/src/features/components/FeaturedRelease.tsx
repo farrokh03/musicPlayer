@@ -6,18 +6,22 @@ import type { FeaturedRelease as FeaturedReleaseData } from "../types/artist.typ
 
 type FeaturedReleaseProps = {
   release?: FeaturedReleaseData;
+  isPlaying?: boolean;
   onPlay?: () => void;
   onPause?: () => void;
 };
 
 export default function FeaturedRelease({
   release: providedRelease,
+  isPlaying,
   onPlay,
   onPause,
 }: FeaturedReleaseProps) {
-  const [playing, setPlaying] = useState(false);
+  const [localPlaying, setLocalPlaying] = useState(false);
   const [saved, setSaved] = useState(false);
   const release = providedRelease ?? MOCK_FEATURED_RELEASE;
+  const isPlayerControlled = isPlaying !== undefined;
+  const currentlyPlaying = isPlayerControlled ? isPlaying : localPlaying;
 
   return (
     <section className="min-w-0">
@@ -45,14 +49,17 @@ export default function FeaturedRelease({
           <div className="mt-2 flex flex-wrap items-center gap-1.5">
             <button
               onClick={() => {
-                if (playing) onPause?.();
+                if (currentlyPlaying) onPause?.();
                 else onPlay?.();
-                setPlaying((current) => !current);
+                if (!isPlayerControlled) {
+                  setLocalPlaying(!currentlyPlaying);
+                }
               }}
+              aria-pressed={currentlyPlaying}
               className="flex h-5 items-center gap-1 rounded-full bg-[#f32648] px-3 text-[8px] font-medium text-white hover:bg-[#ff4561]"
             >
               <Play size={9} fill="currentColor" />
-              {playing ? "Pause" : "Play"}
+              {currentlyPlaying ? "Pause" : "Play"}
             </button>
             <button className="flex h-5 items-center gap-1 rounded-full border border-[#42202c] px-2 text-[8px] text-[#c6b4c1] hover:bg-white/5">
               <Shuffle size={9} /> Shuffle
