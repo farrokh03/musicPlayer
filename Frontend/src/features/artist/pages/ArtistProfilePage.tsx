@@ -23,15 +23,26 @@ import {
   MOCK_RELEASES,
   MOCK_TRACKS,
 } from "../../../mocks/catalog.mock";
-import type { Artist, ArtistActivityItem } from "../../types/artist.types";
+import type {
+  Artist,
+  ArtistActivityItem,
+  Track,
+} from "../../types/artist.types";
 
 export default function ArtistProfilePage() {
   const [activeTab, setActiveTab] = useState<ArtistTab>("Overview");
   const [activeArtistId, setActiveArtistId] = useState(
     MOCK_ARTISTS[0]?.id ?? "",
   );
-  const artist = MOCK_ARTISTS.find((item) => item.id === activeArtistId) ?? MOCK_ARTISTS[0];
-  const { playTrack, togglePlay, setShuffle } = usePlayer();
+  const artist =
+    MOCK_ARTISTS.find((item) => item.id === activeArtistId) ?? MOCK_ARTISTS[0];
+  const {
+    track: currentTrack,
+    playing,
+    playTrack,
+    togglePlay,
+    setShuffle,
+  } = usePlayer();
 
   const artistTracks = useMemo(
     () => MOCK_TRACKS.filter((track) => track.artist === artist.name),
@@ -68,6 +79,13 @@ export default function ArtistProfilePage() {
   );
   const featuredRelease =
     MOCK_FEATURED_RELEASE.artist === artist.name ? MOCK_FEATURED_RELEASE : null;
+  const featuredTrack = useMemo(() => {
+    if (!featuredRelease) return undefined;
+    return (
+      artistTracks.find((item) => item.title === featuredRelease.title) ??
+      artistTracks[0]
+    );
+  }, [artistTracks, featuredRelease]);
 
   const handleArtistChange = useCallback((selectedArtist: Artist) => {
     setActiveArtistId(selectedArtist.id);
@@ -97,13 +115,20 @@ export default function ArtistProfilePage() {
     [playTrack, setShuffle],
   );
 
+  const handleTrackToggle = useCallback(
+    (selectedTrack: Track) => {
+      if (currentTrack.id === selectedTrack.id) {
+        togglePlay();
+        return;
+      }
+      playTrack(selectedTrack);
+    },
+    [currentTrack.id, playTrack, togglePlay],
+  );
+
   const handleFeaturedPlay = useCallback(() => {
-    if (!featuredRelease) return;
-    const track =
-      artistTracks.find((item) => item.title === featuredRelease.title) ??
-      artistTracks[0];
-    if (track) playTrack(track);
-  }, [artistTracks, featuredRelease, playTrack]);
+    if (featuredTrack) handleTrackToggle(featuredTrack);
+  }, [featuredTrack, handleTrackToggle]);
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -114,14 +139,20 @@ export default function ArtistProfilePage() {
               {featuredRelease && (
                 <FeaturedRelease
                   release={featuredRelease}
+                  isPlaying={Boolean(
+                    featuredTrack &&
+                      currentTrack.id === featuredTrack.id &&
+                      playing,
+                  )}
                   onPlay={handleFeaturedPlay}
                   onPause={togglePlay}
                 />
               )}
               <PopularTracks
                 tracks={artistTracks.slice(0, 5)}
-                onPlayTrack={playTrack}
-                onPauseTrack={togglePlay}
+                currentTrackId={currentTrack.id}
+                isPlaying={playing}
+                onToggleTrack={handleTrackToggle}
               />
             </div>
 
@@ -151,8 +182,9 @@ export default function ArtistProfilePage() {
         return (
           <PopularTracks
             tracks={artistTracks}
-            onPlayTrack={playTrack}
-            onPauseTrack={togglePlay}
+            currentTrackId={currentTrack.id}
+            isPlaying={playing}
+            onToggleTrack={handleTrackToggle}
           />
         );
 
