@@ -12,17 +12,24 @@ function formatDuration(durationInSeconds: number) {
 
 type PopularTracksProps = {
   tracks?: Track[];
+  currentTrackId?: number | null;
+  isPlaying?: boolean;
+  onToggleTrack?: (track: Track) => void;
   onPlayTrack?: (track: Track) => void;
   onPauseTrack?: (track: Track) => void;
 };
 
 export default function PopularTracks({
   tracks = MOCK_TRACKS,
+  currentTrackId,
+  isPlaying,
+  onToggleTrack,
   onPlayTrack,
   onPauseTrack,
 }: PopularTracksProps) {
   const [favorites, setFavorites] = useState<number[]>([]);
-  const [playingTrackId, setPlayingTrackId] = useState<number | null>(null);
+  const [localPlayingTrackId, setLocalPlayingTrackId] = useState<number | null>(null);
+  const isPlayerControlled = currentTrackId !== undefined && isPlaying !== undefined;
 
   return (
     <section className="min-w-0 h-40 overflow-y-auto text-[14px]">
@@ -33,8 +40,10 @@ export default function PopularTracks({
             No tracks have been published here yet.
           </p>
         ) : tracks.map((track, index) => {
+          const isTrackPlaying = isPlayerControlled
+            ? currentTrackId === track.id && isPlaying
+            : localPlayingTrackId === track.id;
           const isFavorite = favorites.includes(track.id);
-          const isPlaying = playingTrackId === track.id;
 
           return (
             <div
@@ -45,11 +54,20 @@ export default function PopularTracks({
                 {index + 1}
               </span>
               <button
-                aria-label={`${isPlaying ? "Pause" : "Play"} ${track.title}`}
+                aria-label={`${isTrackPlaying ? "Pause" : "Play"} ${track.title}`}
+                aria-pressed={isTrackPlaying}
                 onClick={() => {
-                  if (isPlaying) onPauseTrack?.(track);
+                  if (onToggleTrack) {
+                    onToggleTrack(track);
+                    if (!isPlayerControlled) {
+                      setLocalPlayingTrackId(isTrackPlaying ? null : track.id);
+                    }
+                    return;
+                  }
+
+                  if (isTrackPlaying) onPauseTrack?.(track);
                   else onPlayTrack?.(track);
-                  setPlayingTrackId(isPlaying ? null : track.id);
+                  setLocalPlayingTrackId(isTrackPlaying ? null : track.id);
                 }}
                 className="relative shrink-0"
               >
@@ -58,7 +76,7 @@ export default function PopularTracks({
                   src={track.cover}
                   alt={`${track.album} artwork`}
                 />
-                {isPlaying && (
+                {isTrackPlaying && (
                   <span className="absolute inset-0 flex items-center justify-center rounded-full bg-black/55 text-sm text-white">
                     ♫
                   </span>
