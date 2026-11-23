@@ -70,7 +70,7 @@ export default function ArtistHero({
   };
 
   const shareArtist = async () => {
-    const artistUrl = new URL(window.location.href);
+    const artistUrl = new URL("/artistProfile", window.location.origin);
     artistUrl.searchParams.set("artist", artist.id);
     const shareUrl = artistUrl.toString();
 
