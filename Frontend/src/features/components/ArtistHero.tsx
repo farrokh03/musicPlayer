@@ -17,6 +17,7 @@ import type { ArtistHeroProps } from "../types/artist.types";
 const FEATURED_ARTISTS = MOCK_ARTISTS.slice(0, 3);
 
 export default function ArtistHero({
+  initialArtistId,
   autoPlay = true,
   interval = 6000,
   onPlay,
@@ -24,7 +25,12 @@ export default function ArtistHero({
   onArtistClick,
   onArtistChange,
 }: ArtistHeroProps) {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(() => {
+    const requestedIndex = FEATURED_ARTISTS.findIndex(
+      (item) => item.id === initialArtistId,
+    );
+    return Math.max(0, requestedIndex);
+  });
   const [following, setFollowing] = useState<Record<string, boolean>>({});
   const [copied, setCopied] = useState(false);
 
