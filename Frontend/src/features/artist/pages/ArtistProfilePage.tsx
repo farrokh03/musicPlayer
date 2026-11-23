@@ -232,6 +232,7 @@ export default function ArtistProfilePage() {
     <div className="min-h-screen bg-[#090709] p-2 text-white">
       <GlobalHeader />
       <ArtistHero
+        initialArtistId={activeArtistId}
         onArtistChange={handleArtistChange}
         onArtistClick={handleArtistClick}
         onPlay={handlePlayArtist}
