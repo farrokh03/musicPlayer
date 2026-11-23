@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import GlobalHeader from "../../../components/layout/GlobalHeader";
 import ArtistHero from "../../components/ArtistHero";
 import ArtistNavigation, {
@@ -30,10 +31,16 @@ import type {
 } from "../../types/artist.types";
 
 export default function ArtistProfilePage() {
+  const [searchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState<ArtistTab>("Overview");
-  const [activeArtistId, setActiveArtistId] = useState(
-    MOCK_ARTISTS[0]?.id ?? "",
-  );
+  const [activeArtistId, setActiveArtistId] = useState(() => {
+    const requestedArtistId = searchParams.get("artist");
+    return (
+      MOCK_ARTISTS.find((item) => item.id === requestedArtistId)?.id ??
+      MOCK_ARTISTS[0]?.id ??
+      ""
+    );
+  });
   const artist =
     MOCK_ARTISTS.find((item) => item.id === activeArtistId) ?? MOCK_ARTISTS[0];
   const {
@@ -89,6 +96,11 @@ export default function ArtistProfilePage() {
 
   const handleArtistChange = useCallback((selectedArtist: Artist) => {
     setActiveArtistId(selectedArtist.id);
+  }, []);
+
+  const handleArtistClick = useCallback((artistId: string) => {
+    setActiveArtistId(artistId);
+    setActiveTab("Overview");
   }, []);
 
   const handlePlayArtist = useCallback(
@@ -221,6 +233,7 @@ export default function ArtistProfilePage() {
       <GlobalHeader />
       <ArtistHero
         onArtistChange={handleArtistChange}
+        onArtistClick={handleArtistClick}
         onPlay={handlePlayArtist}
         onShuffle={handleShuffleArtist}
       />
