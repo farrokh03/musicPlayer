@@ -80,6 +80,7 @@ export type ArtistActivityItem = {
 };
 
 export type ArtistHeroProps = {
+  initialArtistId?: string;
   autoPlay?: boolean;
   interval?: number;
   onPlay?: (artistId: string) => void;
