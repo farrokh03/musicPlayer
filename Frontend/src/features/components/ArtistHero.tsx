@@ -64,13 +64,15 @@ export default function ArtistHero({
   };
 
   const shareArtist = async () => {
-    const artistUrl = `${window.location.origin}/artist/${artist.id}`;
+    const artistUrl = new URL(window.location.href);
+    artistUrl.searchParams.set("artist", artist.id);
+    const shareUrl = artistUrl.toString();
 
     try {
       if (navigator.share) {
-        await navigator.share({ title: artist.name, url: artistUrl });
+        await navigator.share({ title: artist.name, url: shareUrl });
       } else {
-        await navigator.clipboard.writeText(artistUrl);
+        await navigator.clipboard.writeText(shareUrl);
         setCopied(true);
         window.setTimeout(() => setCopied(false), 1800);
       }
